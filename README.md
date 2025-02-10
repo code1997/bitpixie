@@ -21,8 +21,7 @@ The following packages have to be installed on the attacker machine:
 
 For debian based systems:
 ```bash
-sudo apt install dnsmasq libwin-hivex-perl
-pipx install impacket
+sudo apt install dnsmasq libwin-hivex-perl python3-impacket
 ```
 
 > [!note]
