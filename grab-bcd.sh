@@ -77,9 +77,9 @@ echo '"Element"=hex(3):00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,06,00,00,
 
 # Copy BCD template
 echo-info "Patching BCD template with victim specific GUIDs..."
-cp -f PXE-Server/Boot/BCD-template PXE-Server/Boot/BCD
+cp -f pxe-server/Boot/BCD-template pxe-server/Boot/BCD
 
 # Merge patch into BCD file
-hivexregedit --merge PXE-Server/Boot/BCD /tmp/patch.reg
+hivexregedit --merge pxe-server/Boot/BCD /tmp/patch.reg
 
-echo-info "Created modified BCD file: PXE-Server/Boot/BCD"
+echo-info "Created modified BCD file: pxe-server/Boot/BCD"

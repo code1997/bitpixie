@@ -35,7 +35,7 @@ function start-pxe-server {
 
   # Start dnsmasq
   echo-info "Starting dnsmasq..."
-  sudo dnsmasq --no-daemon --interface=$interface --dhcp-range=10.13.37.100,10.13.37.101,255.255.255.0,1h --dhcp-boot=bootmgfw.efi --enable-tftp --tftp-root=$SCRIPTPATH/PXE-Server
+  sudo dnsmasq --no-daemon --interface=$interface --dhcp-range=10.13.37.100,10.13.37.101,255.255.255.0,1h --dhcp-boot=bootmgfw.efi --enable-tftp --tftp-root=$SCRIPTPATH/pxe-server
   echo-info "Stopping dnsmasq..."
 }
 
@@ -55,7 +55,7 @@ function start-pxe-server {
 
   # Start dnsmasq
   echo-info "Starting smbserver.py..."
-  sudo $(which smbserver.py) -smb2support smb "$scriptpath/PXE-Server/Boot"
+  sudo $(which smbserver.py) -smb2support smb "$scriptpath/pxe-server/Boot"
   echo-info "Stopping smbserver.py..."
 }
 

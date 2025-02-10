@@ -110,9 +110,25 @@ The XML of the network interface should look lke this:
 ```
 
 ### Building the initrd
-All files for building the initrd can be found in the Linux-Exploit folder.
-The complete alpine-initrd.xz can be built using the script `./build-initramfs.sh`.
-The file is automatically transfered to the `PXE-Server/` folder.
+The complete `bitpixie-initramfs,gz` can be built using the script `./build
+[-d|--debug]`. If the `--debug` flag is used the temporary rootfs directory
+will be not deleted in order to manually examinate it via e.g. `sudo
+[chroot|arch-chroot] /path/to/temp/initramfs sh`. The final gzipped initramfs
+is automatically transfered to the `pxe-server/` directory.
+
+The initramfs can be tested locally on the terminal via QEMU:
+
+```
+# Install qemu-system-x86_64 (minimal configuration)
+# $ apt install qemu-system-x86
+# Note: For more information see e.g. https://wiki.ubuntuusers.de/QEMU/
+qemu-system-x86_64 \
+  -m 1G -enable-kvm  \
+  -kernel pxe-server/linux \
+  -initrd pxe-server/bitpixie-initramfs.gz \
+  -append "console=ttyS0" \
+  -nographic
+```
 
 ## Alternative Method of obtaining the BCD (not recommended)
 Boot the victim system into the initramfs using PXE boot: `./start-server.sh get-bcd <interface>`
@@ -123,10 +139,10 @@ On the attacker machine execute the BCD extractor script:
 $ ./grab-bcd.sh /dev/sda
 [+] Info: Grabbing disk and partition GUIDs via SSH...
 [...]
-[+] Info: Created modified BCD file: PXE-Server/Boot/BCD
+[+] Info: Created modified BCD file: pxe-server/Boot/BCD
 ```
 This script obtains the disk and partition GUID from the victim computer and creates a registry patch file.
-Afterwards the BCD-file gets patched and copied to PXE-Server/Boot/BCD.
+Afterwards the BCD-file gets patched and copied to pxe-server/Boot/BCD.
 > [!note]
 > The template file file needs to be served as `Boot\BCD` via PXE.
 

@@ -1,3 +1,5 @@
-Linux-Exploit/src/
-Linux-Exploit/alpine-initrd.xz
-PXE-Server/alpine-initrd.xz
+.cache
+pxe-server/linux
+pxe-server/shimx64.efi
+pxe-server/grubx64.efi
+pxe-server/bitpixie-initramfs*

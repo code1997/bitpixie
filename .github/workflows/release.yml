@@ -1,0 +1,21 @@
+name: release-initramfs
+
+on:
+  push:
+    # Pattern matched against tags like e.g. v1.0
+    tags:
+      - '*'
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Build initramfs tarball
+        # Sadly alpine-make-rootfs needs sudo
+        run: sudo bash ./build.sh
+      - name: Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: ./pxe-server/bitpixie-initramfs.gz
